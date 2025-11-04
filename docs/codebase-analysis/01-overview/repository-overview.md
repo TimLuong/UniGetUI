@@ -69,7 +69,7 @@ UniGetUI is designed for:
 - Install directly from the [Microsoft Store](https://apps.microsoft.com/detail/xpfftq032ptphf) for automatic updates and easy installation.
 
 **Direct Download**
-- Download the installer from the [latest release](https://github.com/marticliment/UniGetUI/releases/latest/download/WingetUI.Installer.exe) and run it.
+- Download the installer from the [latest release](https://github.com/marticliment/UniGetUI/releases/latest/download/UniGetUI.Installer.exe) and run it.
 
 **Via WinGet**
 ```cmd
