@@ -4,9 +4,10 @@
 
 ### Required Software
 - [ ] **Windows 10 or Windows 11** - The application is built specifically for Windows
-- [ ] **.NET SDK 8.0** or higher - Required for building the application
+- [ ] **.NET SDK 8.0** - Required for building the application
   - Download from: https://dotnet.microsoft.com/download/dotnet/8.0
   - Target framework: `net8.0-windows10.0.26100.0`
+  - **Note:** .NET 8.0 is specifically required; newer versions may not be compatible
 - [ ] **Python 3.x** - Required for build scripts (version management, integrity generation)
   - Download from: https://www.python.org/downloads/
 - [ ] **Git** - For version control
@@ -203,11 +204,11 @@ py --version
 - Download Python from: https://www.python.org/downloads/
 - During installation, check "Add Python to PATH"
 
-### Issue 4: Build Fails with "Platform x64 Not Found"
+### Issue 4: Build Fails with Platform Configuration
 ```
-error MSB1001: Unknown switch: Platform=x64
+error : The Platform property is not set
 ```
-**Solution:** Use the correct syntax for your build tool
+**Solution:** Ensure you specify the platform explicitly
 ```bash
 # Correct .NET CLI syntax
 dotnet build --configuration Release --property:Platform=x64
@@ -268,10 +269,11 @@ dotnet sln src/UniGetUI.sln list
 dotnet clean src/UniGetUI.sln
 
 # Build specific configuration
-dotnet build src/UniGetUI.sln -c Debug
-dotnet build src/UniGetUI.sln -c Release
+dotnet build src/UniGetUI.sln --configuration Debug
+dotnet build src/UniGetUI.sln --configuration Release
 
-# Run specific test project
+# Run specific test project (examples)
+dotnet test src/UniGetUI.Core.Classes.Tests
 dotnet test src/UniGetUI.Core.Data.Tests
 
 # Watch for changes and rebuild automatically (requires dotnet watch)
