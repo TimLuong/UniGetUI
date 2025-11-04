@@ -275,7 +275,7 @@ if (result != "" && httpResponse.StatusCode == HttpStatusCode.OK)
 | Endpoint | Method | Purpose | Implementation File |
 |----------|--------|---------|-------------------|
 | `/marticliment/UniGetUI/main/src/UniGetUI.Core.LanguageEngine/Assets/Languages/lang_{code}.json` | GET | Download updated translation files | `LanguageEngine.cs` |
-| `/marticliment/UniGetUI/main/WebBasedData/screenshot-database-v2.json` | GET | Download icon and screenshot database | `IconDatabase.cs` |
+| `/marticliment/UniGetUI/raw/refs/heads/main/WebBasedData/screenshot-database-v2.json` | GET | Download icon and screenshot database | `IconDatabase.cs` |
 | `/cargo-bins/cargo-binstall/main/install-from-binstall-release.ps1` | GET | Download cargo-binstall installer | `Cargo.cs` |
 
 **Configuration:**
@@ -565,9 +565,16 @@ catch (Exception ex)
 **Configuration:**
 ```csharp
 string ErrorUrl = $"https://www.marticliment.com/error-report/" +
-    $"?appName={Uri.EscapeDataString(CoreData.VersionName)}" +
-    $"&errorBody={Uri.EscapeDataString(errorBody)}" +
-    $"&context={Uri.EscapeDataString(context)}";
+    $"?appName=UniGetUI" +
+    $"&appVersion={Uri.EscapeDataString(CoreData.VersionName)}" +
+    $"&buildNumber={Uri.EscapeDataString(CoreData.BuildNumber.ToString())}" +
+    $"&errorBody={Uri.EscapeDataString(Error_String)}";
+
+// The Error_String contains:
+// - Environment details (Windows version, language, app version, build number)
+// - Integrity report
+// - Exception details (type, HResult, message, data, stack trace)
+// - Inner exception details (if any)
 ```
 
 **Rate Limits:**
