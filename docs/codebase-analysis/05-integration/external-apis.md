@@ -274,9 +274,9 @@ if (result != "" && httpResponse.StatusCode == HttpStatusCode.OK)
 **Endpoints Used:**
 | Endpoint | Method | Purpose | Implementation File |
 |----------|--------|---------|-------------------|
-| `/marticliment/UniGetUI/main/src/UniGetUI.Core.LanguageEngine/Assets/Languages/lang_{code}.json` | GET | Download updated translation files | `LanguageEngine.cs` |
-| `/marticliment/UniGetUI/raw/refs/heads/main/WebBasedData/screenshot-database-v2.json` | GET | Download icon and screenshot database | `IconDatabase.cs` |
-| `/cargo-bins/cargo-binstall/main/install-from-binstall-release.ps1` | GET | Download cargo-binstall installer | `Cargo.cs` |
+| `raw.githubusercontent.com/marticliment/UniGetUI/main/src/UniGetUI.Core.LanguageEngine/Assets/Languages/lang_{code}.json` | GET | Download updated translation files | `LanguageEngine.cs` |
+| `github.com/marticliment/UniGetUI/raw/refs/heads/main/WebBasedData/screenshot-database-v2.json` | GET | Download icon and screenshot database | `IconDatabase.cs` |
+| `raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.ps1` | GET | Download cargo-binstall installer | `Cargo.cs` |
 
 **Configuration:**
 ```csharp
@@ -583,6 +583,11 @@ string ErrorUrl = $"https://www.marticliment.com/error-report/" +
 
 **Error Handling:**
 Errors during error reporting are likely logged but not explicitly handled (fail silently to avoid recursive error loops)
+
+**Known Limitations:**
+- Uses GET method with query parameters, which may have URL length limitations for very large error reports
+- The `errorBody` parameter contains the full error report which could exceed browser/server URL limits in some cases
+- Currently uses shell execution to open URL in default browser
 
 **Dependencies:**
 - **Library:** System.Uri (for URL encoding)
