@@ -92,7 +92,7 @@ public class ObservableQueue<T> : Queue<T>
 ### Pattern 4: Strategy Pattern
 - **Type:** Behavioral
 - **Purpose:** Defines a family of algorithms (package manager operations) and makes them interchangeable through interfaces
-- **Implementation Location:** `src/UniGetUI.PAckageEngine.Interfaces/IPackageManager.cs`
+- **Implementation Location:** `src/UniGetUI.PackageEngine.Interfaces/IPackageManager.cs`
 
 **Example:**
 ```csharp
