@@ -223,8 +223,8 @@ graph TD
 ```
 
 **Legend:**
-- Red nodes: Top 3 most critical files
-- Yellow nodes: Highly critical file
+- Red nodes: Top 4 most critical files (5-star criticality)
+- Yellow nodes: Highly critical file (4-star criticality)
 - Standard nodes: Supporting files and dependencies
 
 ## Modification Impact
