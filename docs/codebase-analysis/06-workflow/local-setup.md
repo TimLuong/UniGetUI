@@ -134,7 +134,7 @@ dotnet test UniGetUI.sln --verbosity quiet --nologo
 dotnet test UniGetUI.sln --verbosity normal
 
 # Run tests for a specific project
-dotnet test UniGetUI.Core.Classes.Tests/UniGetUI.Core.Classes.Tests.csproj
+dotnet test UniGetUI.Core.Classes.Tests/
 ```
 
 ## Verification
@@ -198,7 +198,7 @@ Python is not recognized as an internal or external command
 # Verify Python installation
 python --version
 
-# Or use py launcher on Windows
+# Or use py launcher on Windows (included with Python 3.3+)
 py --version
 ```
 - Download Python from: https://www.python.org/downloads/
@@ -273,8 +273,8 @@ dotnet build src/UniGetUI.sln --configuration Debug
 dotnet build src/UniGetUI.sln --configuration Release
 
 # Run specific test project (examples)
-dotnet test src/UniGetUI.Core.Classes.Tests
-dotnet test src/UniGetUI.Core.Data.Tests
+dotnet test src/UniGetUI.Core.Classes.Tests/
+dotnet test src/UniGetUI.Core.Data.Tests/
 
 # Watch for changes and rebuild automatically (requires dotnet watch)
 dotnet watch --project src/UniGetUI/UniGetUI.csproj run
