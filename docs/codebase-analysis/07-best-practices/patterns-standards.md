@@ -66,6 +66,12 @@ public static class TaskRecycler<ReturnT>
 ```csharp
 public class ObservableQueue<T> : Queue<T>
 {
+    // Custom EventArgs using C# 12 primary constructor
+    public class EventArgs(T item)
+    {
+        public readonly T Item = item;
+    }
+
     public event EventHandler<EventArgs>? ItemEnqueued;
     public event EventHandler<EventArgs>? ItemDequeued;
 
@@ -457,6 +463,39 @@ public static readonly string DefaultValue = "test";
 private async Task DoWorkAsync() { }
 ```
 
+### Modern C# Features
+
+#### Primary Constructors (C# 12)
+```csharp
+// Used for concise class definitions with constructor parameters
+public class EventArgs(T item)
+{
+    public readonly T Item = item;
+}
+
+// Traditional equivalent:
+public class EventArgs
+{
+    public readonly T Item;
+    public EventArgs(T item) { this.Item = item; }
+}
+```
+
+#### File-Scoped Namespaces (C# 10)
+```csharp
+// Preferred: Reduces indentation
+namespace UniGetUI.Core.Classes;
+
+public class MyClass { }
+```
+
+#### Target-Typed New (C# 9)
+```csharp
+// Use when type is obvious from context
+ConcurrentDictionary<int, Task> _tasks = new();
+ManagerSource new_source = new(__manager, name, __default_uri);
+```
+
 ### Nullable Reference Types
 
 #### Null-Safety
@@ -468,8 +507,11 @@ private async Task DoWorkAsync() { }
 [NotNull]
 public string? Locale { get; private set; }
 
-// Null-conditional operators
-ItemEnqueued?.Invoke(this, new EventArgs(item));
+// Null-conditional operators for safe event invocation
+ItemEnqueued?.Invoke(this, eventArgs);
+
+// Null-coalescing for defaults
+string value = dict.GetValueOrDefault(key) ?? "";
 ```
 
 ### Git Commit Messages
