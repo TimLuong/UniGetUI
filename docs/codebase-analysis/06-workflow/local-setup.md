@@ -210,7 +210,7 @@ error MSB1001: Unknown switch: Platform=x64
 **Solution:** Use the correct syntax for your build tool
 ```bash
 # Correct .NET CLI syntax
-dotnet build --configuration Release /p:Platform=x64
+dotnet build --configuration Release --property:Platform=x64
 
 # Or set platform in Visual Studio through Configuration Manager
 ```
@@ -312,10 +312,10 @@ To create a full installer package:
 ## Additional Resources
 
 - **Official Documentation:** https://www.marticliment.com/unigetui/
-- **Contributing Guidelines:** See `CONTRIBUTING.md` in the repository root
+- **Contributing Guidelines:** https://github.com/marticliment/UniGetUI/blob/main/CONTRIBUTING.md
 - **Issue Tracker:** https://github.com/marticliment/UniGetUI/issues
 - **Wiki:** https://github.com/marticliment/UniGetUI/wiki
-- **Command-line Arguments:** See `cli-arguments.md` in the repository root
+- **Command-line Arguments:** https://github.com/marticliment/UniGetUI/blob/main/cli-arguments.md
 
 ## Getting Help
 
@@ -323,7 +323,7 @@ If you encounter issues not covered here:
 
 1. Check the [GitHub Issues](https://github.com/marticliment/UniGetUI/issues) for similar problems
 2. Review the [Discussions](https://github.com/marticliment/UniGetUI/discussions) section
-3. Read the [Contributing Guidelines](../../../CONTRIBUTING.md) for development standards
+3. Read the [Contributing Guidelines](https://github.com/marticliment/UniGetUI/blob/main/CONTRIBUTING.md) for development standards
 4. Create a new issue with:
    - Your Windows version
    - .NET SDK version (`dotnet --version`)
