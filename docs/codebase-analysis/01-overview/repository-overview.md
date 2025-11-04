@@ -3,7 +3,7 @@
 ## Project Purpose
 UniGetUI (formerly WingetUI) is a unified graphical user interface application for Windows 10 and 11 that consolidates multiple command-line package managers into a single, intuitive interface. The project aims to simplify software management on Windows by providing a centralized platform where users can discover, install, update, and uninstall software packages from various package managers including WinGet, Scoop, Chocolatey, Pip, Npm, .NET Tool, and PowerShell Gallery.
 
-The application serves as a bridge between users and CLI-based package management systems, eliminating the need to memorize complex command-line syntax while leveraging the power and breadth of multiple package ecosystems simultaneously.
+The application serves as a bridge between users and CLI-based package management systems. It eliminates the need to memorize complex command-line syntax while leveraging the power and breadth of multiple package ecosystems simultaneously.
 
 ## Problem Statement
 Windows users face several challenges when managing software:
@@ -57,7 +57,7 @@ UniGetUI is designed for:
 
 - **Import/Export Functionality**: Export package lists with custom installation parameters to set up new machines or share configurations, and backup installed packages locally for easy recovery during system migrations.
 
-- **Multi-language Support**: Available in over 40 languages with active community translation efforts.
+- **Multi-language Support**: Available in 50+ languages with active community translation efforts.
 
 - **Built-in Auto-updater**: Keep UniGetUI itself up-to-date automatically without manual intervention.
 
