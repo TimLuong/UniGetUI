@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="ApplicationTitle" xml:space="preserve"><value>مثال تطبيق متعدد اللغات</value></data>
+  <data name="WelcomeMessage" xml:space="preserve"><value>مرحباً! يوضح هذا التطبيق ميزات الترجمة.</value></data>
+  <data name="DateTimeFormatting" xml:space="preserve"><value>تنسيق التاريخ والوقت</value></data>
+  <data name="NumberFormatting" xml:space="preserve"><value>تنسيق الأرقام</value></data>
+  <data name="RegionalInformation" xml:space="preserve"><value>المعلومات الإقليمية</value></data>
+  <data name="RefreshButton" xml:space="preserve"><value>تحديث</value></data>
+  <data name="ShortDate" xml:space="preserve"><value>تاريخ قصير</value></data>
+  <data name="LongDate" xml:space="preserve"><value>تاريخ طويل</value></data>
+  <data name="Time" xml:space="preserve"><value>الوقت</value></data>
+  <data name="Number" xml:space="preserve"><value>رقم</value></data>
+  <data name="Currency" xml:space="preserve"><value>عملة</value></data>
+  <data name="Percent" xml:space="preserve"><value>نسبة مئوية</value></data>
+  <data name="CultureName" xml:space="preserve"><value>اسم الثقافة</value></data>
+  <data name="DisplayName" xml:space="preserve"><value>اسم العرض</value></data>
+  <data name="EnglishName" xml:space="preserve"><value>الاسم الإنجليزي</value></data>
+  <data name="NativeName" xml:space="preserve"><value>الاسم الأصلي</value></data>
+  <data name="CountryName" xml:space="preserve"><value>البلد/المنطقة</value></data>
+  <data name="CurrencySymbol" xml:space="preserve"><value>رمز العملة</value></data>
+  <data name="DecimalSeparator" xml:space="preserve"><value>فاصل عشري</value></data>
+  <data name="ThousandsSeparator" xml:space="preserve"><value>فاصل الآلاف</value></data>
+  <data name="ShortDatePattern" xml:space="preserve"><value>نمط تاريخ قصير</value></data>
+  <data name="LongDatePattern" xml:space="preserve"><value>نمط تاريخ طويل</value></data>
+  <data name="ShortTimePattern" xml:space="preserve"><value>نمط وقت قصير</value></data>
+  <data name="LongTimePattern" xml:space="preserve"><value>نمط وقت طويل</value></data>
+  <data name="FirstDayOfWeek" xml:space="preserve"><value>أول يوم في الأسبوع</value></data>
+  <data name="IsRightToLeft" xml:space="preserve"><value>من اليمين إلى اليسار</value></data>
+</root>
