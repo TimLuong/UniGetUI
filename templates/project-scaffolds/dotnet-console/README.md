@@ -176,19 +176,20 @@ var serviceProvider = services.BuildServiceProvider();
 var rootCommand = new RootCommand("MyApp - A sample console application");
 
 // Add commands
-var processCommand = new Command("process", "Process items")
-{
-    new Option<string>("--input", "Input file path") { IsRequired = true },
-    new Option<string>("--output", "Output file path")
-};
+var inputOption = new Option<string>("--input", "Input file path") { IsRequired = true };
+var outputOption = new Option<string>("--output", "Output file path");
+
+var processCommand = new Command("process", "Process items");
+processCommand.AddOption(inputOption);
+processCommand.AddOption(outputOption);
 
 processCommand.SetHandler(async (string input, string output) =>
 {
     var command = serviceProvider.GetRequiredService<ProcessCommand>();
     await command.ExecuteAsync(input, output);
 },
-processCommand.Options[0] as Option<string>,
-processCommand.Options[1] as Option<string>);
+inputOption,
+outputOption);
 
 rootCommand.AddCommand(processCommand);
 

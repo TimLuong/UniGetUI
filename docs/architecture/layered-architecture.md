@@ -204,7 +204,8 @@ public class PackageService : IPackageService
         
         if (result.Success)
         {
-            await _repository.MarkAsInstalledAsync(packageId);
+            package.MarkAsInstalled();
+            await _repository.UpdateAsync(package);
         }
         
         return result.Success;

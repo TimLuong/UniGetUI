@@ -210,10 +210,6 @@ public partial class App : Application
         Width="900"
         WindowStartupLocation="CenterScreen">
     
-    <Window.DataContext>
-        <viewModels:MainViewModel/>
-    </Window.DataContext>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

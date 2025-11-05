@@ -570,7 +570,7 @@ public partial class HomeViewModel : ViewModelBase
             SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
             SelectionMode="Single">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:ItemDto">
+                <DataTemplate>
                     <Grid Padding="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -578,14 +578,14 @@ public partial class HomeViewModel : ViewModelBase
                         </Grid.ColumnDefinitions>
                         
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="{x:Bind Name}" 
+                            <TextBlock Text="{Binding Name}" 
                                      Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <TextBlock Text="{x:Bind Description}" 
+                            <TextBlock Text="{Binding Description}" 
                                      Style="{StaticResource CaptionTextBlockStyle}"
                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                      Margin="0,4,0,0"/>
                             <TextBlock 
-                                Text="{x:Bind CreatedAt}"
+                                Text="{Binding CreatedAt}"
                                 Style="{StaticResource CaptionTextBlockStyle}"
                                 Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                 Margin="0,4,0,0"/>
@@ -595,8 +595,8 @@ public partial class HomeViewModel : ViewModelBase
                             Grid.Column="1"
                             Content="Delete"
                             Style="{StaticResource AccentButtonStyle}"
-                            Command="{Binding ViewModel.DeleteItemCommand, ElementName=PageRoot}"
-                            CommandParameter="{x:Bind}"/>
+                            Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                            CommandParameter="{Binding}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
