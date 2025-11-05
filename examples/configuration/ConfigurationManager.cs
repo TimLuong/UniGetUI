@@ -27,6 +27,8 @@ namespace UniGetUI.Configuration.Examples
         /// </summary>
         private IConfiguration BuildConfiguration()
         {
+            var args = Environment.GetCommandLineArgs().Skip(1).ToArray();
+            
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
                 
@@ -47,7 +49,7 @@ namespace UniGetUI.Configuration.Examples
                 .AddEnvironmentVariables(prefix: "UNIGETUI_")
                 
                 // 5. Command-line arguments (highest priority)
-                .AddCommandLine(Environment.GetCommandLineArgs());
+                .AddCommandLine(args);
 
             return builder.Build();
         }
