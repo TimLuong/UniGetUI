@@ -1,0 +1,158 @@
+# Azure DevOps Pipeline - Test
+# This pipeline runs comprehensive tests for UniGetUI
+
+trigger:
+  branches:
+    include:
+    - main
+    - develop
+  paths:
+    include:
+    - '**.cs'
+    - '**.csproj'
+    - '**.sln'
+
+pr:
+  branches:
+    include:
+    - main
+    - develop
+  paths:
+    include:
+    - '**.cs'
+    - '**.csproj'
+    - '**.sln'
+
+schedules:
+- cron: "0 2 * * *"
+  displayName: 'Daily test run'
+  branches:
+    include:
+    - main
+  always: true
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  dotnetVersion: '8.0.x'
+
+stages:
+- stage: Test
+  displayName: 'Test Application'
+  jobs:
+  
+  - job: UnitTests
+    displayName: 'Run Unit Tests'
+    steps:
+    
+    - checkout: self
+      fetchDepth: 0
+      displayName: 'Checkout repository'
+    
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        version: $(dotnetVersion)
+        packageType: sdk
+    
+    - task: Cache@2
+      displayName: 'Cache NuGet packages'
+      inputs:
+        key: 'nuget | "$(Agent.OS)" | **/packages.lock.json'
+        restoreKeys: |
+          nuget | "$(Agent.OS)"
+          nuget
+        path: $(NUGET_PACKAGES)
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore dependencies'
+      inputs:
+        command: 'restore'
+        projects: 'src/UniGetUI.sln'
+        verbosityRestore: 'Minimal'
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Run unit tests with coverage'
+      inputs:
+        command: 'test'
+        projects: 'src/UniGetUI.sln'
+        arguments: '--no-restore --configuration $(buildConfiguration) --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover'
+        publishTestResults: false
+    
+    - task: PublishTestResults@2
+      displayName: 'Publish test results'
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '$(Agent.TempDirectory)/TestResults/**/*.trx'
+        failTaskOnFailedTests: true
+        testRunTitle: 'Unit Tests'
+    
+    - task: PublishCodeCoverageResults@2
+      displayName: 'Publish code coverage'
+      inputs:
+        summaryFileLocation: '$(Agent.TempDirectory)/TestResults/**/coverage.opencover.xml'
+        codecoverageTool: 'Cobertura'
+        failIfCoverageEmpty: false
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish test results artifacts'
+      condition: always()
+      inputs:
+        PathtoPublish: '$(Agent.TempDirectory)/TestResults'
+        ArtifactName: 'test-results'
+        publishLocation: 'Container'
+  
+  - job: CodeQuality
+    displayName: 'Code Quality Analysis'
+    steps:
+    
+    - checkout: self
+      fetchDepth: 0
+      displayName: 'Checkout repository'
+    
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        version: $(dotnetVersion)
+        packageType: sdk
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore dependencies'
+      inputs:
+        command: 'restore'
+        projects: 'src/UniGetUI.sln'
+        verbosityRestore: 'Minimal'
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Build for analysis'
+      inputs:
+        command: 'build'
+        projects: 'src/UniGetUI.sln'
+        arguments: '--configuration $(buildConfiguration) --no-restore /p:EnforceCodeStyleInBuild=true'
+    
+    - task: PowerShell@2
+      displayName: 'Code quality summary'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "##[section]Code Quality Check Complete"
+          Write-Host "All code style rules enforced"
+
+- stage: Summary
+  displayName: 'Test Summary'
+  dependsOn: Test
+  condition: always()
+  jobs:
+  - job: TestSummary
+    displayName: 'Generate Test Summary'
+    steps:
+    - task: PowerShell@2
+      displayName: 'Print test summary'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "##[section]Test Pipeline Summary"
+          Write-Host "All test stages completed"
+          Write-Host "Review test results and code coverage above"

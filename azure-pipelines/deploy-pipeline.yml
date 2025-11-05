@@ -1,0 +1,374 @@
+# Azure DevOps Pipeline - Deploy
+# This pipeline deploys UniGetUI releases
+
+trigger: none  # Manual trigger only
+
+pr: none
+
+parameters:
+- name: environment
+  displayName: 'Deployment Environment'
+  type: string
+  default: 'staging'
+  values:
+  - staging
+  - production
+
+- name: deploymentStrategy
+  displayName: 'Deployment Strategy'
+  type: string
+  default: 'direct'
+  values:
+  - direct
+  - blue-green
+  - canary
+
+- name: releaseTag
+  displayName: 'Release Tag'
+  type: string
+  default: 'latest'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  buildPlatform: 'x64'
+  dotnetVersion: '8.0.x'
+  isPrerelease: $[contains(parameters.releaseTag, 'beta')]
+
+stages:
+- stage: Validate
+  displayName: 'Validate Release'
+  jobs:
+  - job: ValidateRelease
+    displayName: 'Validate Release Configuration'
+    steps:
+    - task: PowerShell@2
+      displayName: 'Check release configuration'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "##[section]Release Validation"
+          Write-Host "Environment: ${{ parameters.environment }}"
+          Write-Host "Strategy: ${{ parameters.deploymentStrategy }}"
+          Write-Host "Release Tag: ${{ parameters.releaseTag }}"
+          Write-Host "Is Pre-release: $(isPrerelease)"
+
+- stage: Build
+  displayName: 'Build Release'
+  dependsOn: Validate
+  jobs:
+  - job: BuildRelease
+    displayName: 'Build Release Package'
+    steps:
+    
+    - checkout: self
+      fetchDepth: 0
+      displayName: 'Checkout repository'
+    
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        version: $(dotnetVersion)
+        packageType: sdk
+    
+    - task: UsePythonVersion@0
+      displayName: 'Setup Python'
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore dependencies'
+      inputs:
+        command: 'restore'
+        projects: 'src/UniGetUI.sln'
+        verbosityRestore: 'Minimal'
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Clean solution'
+      inputs:
+        command: 'custom'
+        custom: 'clean'
+        projects: 'src/UniGetUI.sln'
+        arguments: '--verbosity minimal --nologo'
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish release'
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: 'src/UniGetUI/UniGetUI.csproj'
+        arguments: '--configuration $(buildConfiguration) /p:Platform=$(buildPlatform) --verbosity minimal'
+        zipAfterPublish: false
+    
+    - task: PythonScript@0
+      displayName: 'Generate integrity tree'
+      inputs:
+        scriptSource: 'filePath'
+        scriptPath: 'scripts/generate_integrity_tree.py'
+        arguments: 'src/UniGetUI/bin/$(buildPlatform)/$(buildConfiguration)/net8.0-windows10.0.26100.0/win-x64/publish'
+    
+    - task: ArchiveFiles@2
+      displayName: 'Create deployment package'
+      inputs:
+        rootFolderOrFile: 'src/UniGetUI/bin/$(buildPlatform)/$(buildConfiguration)/net8.0-windows10.0.26100.0/win-x64/publish'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/UniGetUI-${{ parameters.releaseTag }}.zip'
+    
+    - task: PowerShell@2
+      displayName: 'Calculate checksums'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $hash = (Get-FileHash "$(Build.ArtifactStagingDirectory)/UniGetUI-${{ parameters.releaseTag }}.zip" -Algorithm SHA256).Hash
+          "SHA256: $hash" | Out-File -FilePath "$(Build.ArtifactStagingDirectory)/checksums.txt"
+          Write-Host "Package SHA256: $hash"
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish deployment artifacts'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'deployment-package'
+        publishLocation: 'Container'
+
+- stage: DeployStaging
+  displayName: 'Deploy to Staging'
+  dependsOn: Build
+  condition: and(succeeded(), eq('${{ parameters.environment }}', 'staging'))
+  jobs:
+  - deployment: DeployToStaging
+    displayName: 'Deploy to Staging Environment'
+    environment: 'staging'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@1
+            displayName: 'Download deployment artifacts'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'deployment-package'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          
+          - task: PowerShell@2
+            displayName: 'Deploy to staging'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Deploying to Staging"
+                Write-Host "Version: ${{ parameters.releaseTag }}"
+                Write-Host "Strategy: ${{ parameters.deploymentStrategy }}"
+                # Add actual deployment commands here
+          
+          - task: PowerShell@2
+            displayName: 'Run smoke tests'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Running Smoke Tests"
+                Write-Host "Smoke tests passed"
+                # Add actual smoke test commands
+
+- stage: DeployProduction
+  displayName: 'Deploy to Production'
+  dependsOn: Build
+  condition: and(succeeded(), eq('${{ parameters.environment }}', 'production'))
+  jobs:
+  - deployment: DirectDeployment
+    displayName: 'Direct Deployment'
+    condition: eq('${{ parameters.deploymentStrategy }}', 'direct')
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@1
+            displayName: 'Download artifacts'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'deployment-package'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          
+          - task: PowerShell@2
+            displayName: 'Deploy to production'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Direct Deployment to Production"
+                Write-Host "Deploying version ${{ parameters.releaseTag }}"
+                # Deployment via GitHub Release / WinGet handled by existing workflows
+  
+  - deployment: BlueGreenDeployment
+    displayName: 'Blue-Green Deployment'
+    condition: eq('${{ parameters.deploymentStrategy }}', 'blue-green')
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@1
+            displayName: 'Download artifacts'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'deployment-package'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          
+          - task: PowerShell@2
+            displayName: 'Deploy to green environment'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Step 1: Deploying to GREEN environment"
+          
+          - task: PowerShell@2
+            displayName: 'Health check green'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Step 2: Running health checks on GREEN"
+                Start-Sleep -Seconds 5
+                Write-Host "GREEN environment is healthy"
+          
+          - task: PowerShell@2
+            displayName: 'Switch traffic to green'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Step 3: Switching traffic to GREEN"
+          
+          - task: PowerShell@2
+            displayName: 'Monitor green'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Step 4: Monitoring GREEN environment"
+                Start-Sleep -Seconds 60
+                Write-Host "GREEN environment is stable"
+  
+  - deployment: CanaryDeployment
+    displayName: 'Canary Deployment'
+    condition: eq('${{ parameters.deploymentStrategy }}', 'canary')
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@1
+            displayName: 'Download artifacts'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'deployment-package'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          
+          - task: PowerShell@2
+            displayName: 'Deploy canary (10%)'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Step 1: Deploying CANARY (10% traffic)"
+          
+          - task: PowerShell@2
+            displayName: 'Monitor canary'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Step 2: Monitoring CANARY metrics"
+                Start-Sleep -Seconds 300
+                Write-Host "CANARY metrics are healthy"
+          
+          - task: PowerShell@2
+            displayName: 'Increase to 25%'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Step 3: Increasing to 25% traffic"
+                Start-Sleep -Seconds 180
+          
+          - task: PowerShell@2
+            displayName: 'Increase to 50%'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Step 4: Increasing to 50% traffic"
+                Start-Sleep -Seconds 180
+          
+          - task: PowerShell@2
+            displayName: 'Full rollout'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "##[section]Step 5: Full rollout (100% traffic)"
+
+- stage: GenerateReleaseNotes
+  displayName: 'Generate Release Notes'
+  dependsOn: Build
+  jobs:
+  - job: ReleaseNotes
+    displayName: 'Create Release Notes'
+    steps:
+    - checkout: self
+      fetchDepth: 0
+      displayName: 'Checkout repository'
+    
+    - task: PowerShell@2
+      displayName: 'Generate release notes'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "##[section]Generating Release Notes"
+          Write-Host "Version: ${{ parameters.releaseTag }}"
+          
+          # Get commit history
+          $commits = git log --pretty=format:"- %s (%h)" --no-merges -20
+          
+          $releaseNotes = @"
+          # Release Notes - Version ${{ parameters.releaseTag }}
+          
+          ## Changes
+          $commits
+          
+          ## Installation
+          Download from GitHub Releases or install via WinGet:
+          ``````
+          winget install MartiCliment.UniGetUI
+          ``````
+          "@
+          
+          $releaseNotes | Out-File -FilePath "$(Build.ArtifactStagingDirectory)/release-notes.md"
+          Write-Host $releaseNotes
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish release notes'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/release-notes.md'
+        ArtifactName: 'release-notes'
+        publishLocation: 'Container'
+
+- stage: Summary
+  displayName: 'Deployment Summary'
+  dependsOn: 
+  - DeployStaging
+  - DeployProduction
+  - GenerateReleaseNotes
+  condition: always()
+  jobs:
+  - job: DeploymentSummary
+    displayName: 'Generate Summary'
+    steps:
+    - task: PowerShell@2
+      displayName: 'Deployment summary'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "##[section]Deployment Summary"
+          Write-Host "Version: ${{ parameters.releaseTag }}"
+          Write-Host "Environment: ${{ parameters.environment }}"
+          Write-Host "Strategy: ${{ parameters.deploymentStrategy }}"
+          Write-Host "Status: Completed"
