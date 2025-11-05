@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <AssemblyName>WpfReferenceApp</AssemblyName>
+    <RootNamespace>WpfReferenceApp</RootNamespace>
+    <Authors>UniGetUI Team</Authors>
+    <Company>UniGetUI</Company>
+    <Product>WPF Reference Application</Product>
+    <Description>Reference WPF application demonstrating design patterns from UniGetUI</Description>
+    <Copyright>Copyright © 2025</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+  </ItemGroup>
+</Project>
