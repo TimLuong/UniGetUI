@@ -1,0 +1,326 @@
+<!-- Toast Notification Example -->
+<!-- Follows UniGetUI Design System specification for Notifications -->
+<!-- See: /docs/ui-ux/component-specifications.md#notifications-toast -->
+
+<!-- Success Notification -->
+<Grid x:Name="SuccessToast"
+      Width="360"
+      MinHeight="64"
+      Background="{ThemeResource SystemFillColorSolidBackgroundBase}"
+      BorderBrush="{ThemeResource SystemSuccessColor}"
+      BorderThickness="1,1,1,3"
+      CornerRadius="8"
+      Padding="16"
+      Shadow="{StaticResource NotificationShadow}">
+    
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    
+    <!-- Success Icon -->
+    <FontIcon Grid.Column="0"
+              FontFamily="Segoe Fluent Icons"
+              Glyph="&#xE73E;"
+              FontSize="20"
+              Foreground="{ThemeResource SystemSuccessColor}"
+              VerticalAlignment="Top"
+              Margin="0,2,12,0"/>
+    
+    <!-- Content -->
+    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+        <TextBlock Text="Changes Saved"
+                   FontWeight="SemiBold"
+                   Style="{StaticResource BodyStrongTextBlockStyle}"/>
+        <TextBlock Text="Your document has been saved successfully."
+                   Style="{StaticResource CaptionTextBlockStyle}"
+                   Foreground="{ThemeResource TextSecondaryBrush}"
+                   TextWrapping="Wrap"/>
+    </StackPanel>
+    
+    <!-- Close Button -->
+    <Button Grid.Column="2"
+            Width="24"
+            Height="24"
+            Padding="0"
+            Background="Transparent"
+            BorderThickness="0"
+            VerticalAlignment="Top"
+            Click="OnCloseNotification">
+        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE711;" FontSize="12"/>
+        <AutomationProperties.Name>Close notification</AutomationProperties.Name>
+    </Button>
+    
+    <AutomationProperties.Name>Success notification: Changes Saved</AutomationProperties.Name>
+    <AutomationProperties.LiveSetting>Polite</AutomationProperties.LiveSetting>
+</Grid>
+
+<!-- Error Notification -->
+<Grid x:Name="ErrorToast"
+      Width="360"
+      MinHeight="64"
+      Background="{ThemeResource SystemFillColorSolidBackgroundBase}"
+      BorderBrush="{ThemeResource SystemErrorTextColor}"
+      BorderThickness="1,1,1,3"
+      CornerRadius="8"
+      Padding="16"
+      Margin="0,8,0,0"
+      Shadow="{StaticResource NotificationShadow}">
+    
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    
+    <!-- Error Icon -->
+    <FontIcon Grid.Column="0"
+              FontFamily="Segoe Fluent Icons"
+              Glyph="&#xE783;"
+              FontSize="20"
+              Foreground="{ThemeResource SystemErrorTextColor}"
+              VerticalAlignment="Top"
+              Margin="0,2,12,0"/>
+    
+    <!-- Content with Action -->
+    <StackPanel Grid.Column="1" Spacing="8" VerticalAlignment="Center">
+        <StackPanel Spacing="4">
+            <TextBlock Text="Connection Failed"
+                       FontWeight="SemiBold"
+                       Style="{StaticResource BodyStrongTextBlockStyle}"/>
+            <TextBlock Text="Unable to connect to the server. Please check your internet connection."
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Foreground="{ThemeResource TextSecondaryBrush}"
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+        
+        <!-- Action Buttons -->
+        <StackPanel Orientation="Horizontal" Spacing="8">
+            <HyperlinkButton Content="Retry"
+                             Padding="4,0"
+                             Click="OnRetryConnection">
+                <AutomationProperties.Name>Retry connection</AutomationProperties.Name>
+            </HyperlinkButton>
+            <HyperlinkButton Content="View Details"
+                             Padding="4,0"
+                             Click="OnViewDetails">
+                <AutomationProperties.Name>View error details</AutomationProperties.Name>
+            </HyperlinkButton>
+        </StackPanel>
+    </StackPanel>
+    
+    <!-- Close Button -->
+    <Button Grid.Column="2"
+            Width="24"
+            Height="24"
+            Padding="0"
+            Background="Transparent"
+            BorderThickness="0"
+            VerticalAlignment="Top"
+            Click="OnCloseNotification">
+        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE711;" FontSize="12"/>
+        <AutomationProperties.Name>Close notification</AutomationProperties.Name>
+    </Button>
+    
+    <AutomationProperties.Name>Error notification: Connection Failed</AutomationProperties.Name>
+    <AutomationProperties.LiveSetting>Assertive</AutomationProperties.LiveSetting>
+</Grid>
+
+<!-- Warning Notification -->
+<Grid x:Name="WarningToast"
+      Width="360"
+      MinHeight="64"
+      Background="{ThemeResource SystemFillColorSolidBackgroundBase}"
+      BorderBrush="{ThemeResource SystemCautionColor}"
+      BorderThickness="1,1,1,3"
+      CornerRadius="8"
+      Padding="16"
+      Margin="0,8,0,0"
+      Shadow="{StaticResource NotificationShadow}">
+    
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    
+    <!-- Warning Icon -->
+    <FontIcon Grid.Column="0"
+              FontFamily="Segoe Fluent Icons"
+              Glyph="&#xE7BA;"
+              FontSize="20"
+              Foreground="{ThemeResource SystemCautionColor}"
+              VerticalAlignment="Top"
+              Margin="0,2,12,0"/>
+    
+    <!-- Content -->
+    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+        <TextBlock Text="Storage Almost Full"
+                   FontWeight="SemiBold"
+                   Style="{StaticResource BodyStrongTextBlockStyle}"/>
+        <TextBlock Text="You're using 95% of your storage space. Consider freeing up some space."
+                   Style="{StaticResource CaptionTextBlockStyle}"
+                   Foreground="{ThemeResource TextSecondaryBrush}"
+                   TextWrapping="Wrap"/>
+    </StackPanel>
+    
+    <!-- Close Button -->
+    <Button Grid.Column="2"
+            Width="24"
+            Height="24"
+            Padding="0"
+            Background="Transparent"
+            BorderThickness="0"
+            VerticalAlignment="Top"
+            Click="OnCloseNotification">
+        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE711;" FontSize="12"/>
+        <AutomationProperties.Name>Close notification</AutomationProperties.Name>
+    </Button>
+    
+    <AutomationProperties.Name>Warning notification: Storage Almost Full</AutomationProperties.Name>
+    <AutomationProperties.LiveSetting>Polite</AutomationProperties.LiveSetting>
+</Grid>
+
+<!-- Info Notification -->
+<Grid x:Name="InfoToast"
+      Width="360"
+      MinHeight="64"
+      Background="{ThemeResource SystemFillColorSolidBackgroundBase}"
+      BorderBrush="{ThemeResource SystemAccentColor}"
+      BorderThickness="1,1,1,3"
+      CornerRadius="8"
+      Padding="16"
+      Margin="0,8,0,0"
+      Shadow="{StaticResource NotificationShadow}">
+    
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    
+    <!-- Info Icon -->
+    <FontIcon Grid.Column="0"
+              FontFamily="Segoe Fluent Icons"
+              Glyph="&#xE946;"
+              FontSize="20"
+              Foreground="{ThemeResource SystemAccentColor}"
+              VerticalAlignment="Top"
+              Margin="0,2,12,0"/>
+    
+    <!-- Content -->
+    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+        <TextBlock Text="New Feature Available"
+                   FontWeight="SemiBold"
+                   Style="{StaticResource BodyStrongTextBlockStyle}"/>
+        <TextBlock Text="Check out the new dark mode feature in settings."
+                   Style="{StaticResource CaptionTextBlockStyle}"
+                   Foreground="{ThemeResource TextSecondaryBrush}"
+                   TextWrapping="Wrap"/>
+    </StackPanel>
+    
+    <!-- Close Button -->
+    <Button Grid.Column="2"
+            Width="24"
+            Height="24"
+            Padding="0"
+            Background="Transparent"
+            BorderThickness="0"
+            VerticalAlignment="Top"
+            Click="OnCloseNotification">
+        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE711;" FontSize="12"/>
+        <AutomationProperties.Name>Close notification</AutomationProperties.Name>
+    </Button>
+    
+    <AutomationProperties.Name>Info notification: New Feature Available</AutomationProperties.Name>
+    <AutomationProperties.LiveSetting>Polite</AutomationProperties.LiveSetting>
+</Grid>
+
+<!--
+Design Tokens Used:
+- Width: 360px (fixed)
+- MinHeight: 64px
+- Padding: spacing.lg (16px)
+- BorderRadius: borderRadius.md (8px)
+- Shadow: elevation.level3
+- IconSize: iconSize.medium (20px)
+
+Notification Types:
+1. Info: Blue border, info icon, polite announcement (4s auto-dismiss)
+2. Success: Green border, checkmark icon, polite announcement (4s auto-dismiss)
+3. Warning: Yellow border, warning icon, polite announcement (6s auto-dismiss)
+4. Error: Red border, error icon, assertive announcement (8s or manual dismiss)
+
+Structure:
+- Icon (left): Type-specific icon with semantic color
+- Content (center): Title + message + optional actions
+- Close button (right): Manual dismiss
+
+Accessibility Features:
+- AutomationProperties.LiveSetting for screen reader announcements
+- Polite: Wait for user to finish (info, success, warning)
+- Assertive: Interrupt immediately (errors)
+- Clear, descriptive text
+- Keyboard accessible close button
+- Action buttons when available
+
+Behavior:
+- Slide in from top-right (desktop) or bottom (mobile)
+- Auto-dismiss after duration (except errors requiring acknowledgment)
+- Pause auto-dismiss on hover (desktop)
+- Stack multiple notifications (max 3 visible)
+- Queue additional notifications
+- Newest on top
+
+Animation:
+- Slide in: 300ms easeOutQuint
+- Auto-dismiss: Fade out 200ms
+- Manual dismiss: Slide out + fade 250ms
+
+Position:
+- Desktop: Top-right corner, 16px from edge
+- Mobile: Bottom of screen, full width minus 16px margins
+- Stack vertically with 8px spacing
+
+Best Practices:
+- Brief, actionable messages
+- Use appropriate severity level
+- Provide action buttons when relevant (Retry, View Details, Undo)
+- Don't stack too many (max 3 visible)
+- Critical errors require manual dismiss
+- Group similar notifications
+- Show timestamp for persistent notifications
+
+Action Buttons:
+- Use HyperlinkButton for inline actions
+- Maximum 2 actions per notification
+- Clear, verb-based labels (Retry, Undo, View, Dismiss)
+- Primary action on left
+
+Toast Manager (Code Behind):
+public class ToastManager
+{
+    public void ShowSuccess(string title, string message, int duration = 4000)
+    {
+        // Create and show success toast
+        // Auto-dismiss after duration
+    }
+    
+    public void ShowError(string title, string message, bool autoDismiss = false)
+    {
+        // Create and show error toast
+        // Manual dismiss unless autoDismiss is true
+    }
+    
+    public void ShowWarning(string title, string message, int duration = 6000)
+    {
+        // Create and show warning toast
+    }
+    
+    public void ShowInfo(string title, string message, int duration = 4000)
+    {
+        // Create and show info toast
+    }
+}
+-->

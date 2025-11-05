@@ -1,0 +1,162 @@
+<!-- Text Input Example -->
+<!-- Follows UniGetUI Design System specification for Text Input -->
+<!-- See: /docs/ui-ux/component-specifications.md#text-input-textbox -->
+
+<StackPanel Spacing="4" MaxWidth="400">
+    <!-- Label -->
+    <TextBlock Text="Email Address"
+               Style="{StaticResource CaptionTextBlockStyle}"
+               FontWeight="SemiBold"
+               Foreground="{ThemeResource TextSecondaryBrush}"/>
+    
+    <!-- Text Input with Clear Button -->
+    <Grid>
+        <TextBox x:Name="EmailInput"
+                 PlaceholderText="example@domain.com"
+                 Height="32"
+                 CornerRadius="4"
+                 BorderThickness="1"
+                 Padding="8,0"
+                 VerticalAlignment="Center">
+            
+            <!-- Accessibility -->
+            <AutomationProperties.Name>Email Address</AutomationProperties.Name>
+            <AutomationProperties.AutomationId>TextInput_Email</AutomationProperties.AutomationId>
+            <AutomationProperties.HelpText>Enter your email address</AutomationProperties.HelpText>
+        </TextBox>
+        
+        <!-- Clear Button (shown when text is present) -->
+        <Button x:Name="ClearButton"
+                Width="24"
+                Height="24"
+                Padding="0"
+                Background="Transparent"
+                BorderThickness="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,0,8,0"
+                Visibility="Collapsed"
+                Click="OnClearText">
+            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE711;" FontSize="12"/>
+            <AutomationProperties.Name>Clear text</AutomationProperties.Name>
+        </Button>
+    </Grid>
+    
+    <!-- Helper Text -->
+    <TextBlock Text="We'll never share your email with anyone else"
+               Style="{StaticResource CaptionTextBlockStyle}"
+               Foreground="{ThemeResource TextTertiaryBrush}"
+               TextWrapping="Wrap"/>
+    
+    <!-- Error Message (shown when validation fails) -->
+    <TextBlock x:Name="ErrorMessage"
+               Style="{StaticResource CaptionTextBlockStyle}"
+               Foreground="{ThemeResource SystemErrorTextColor}"
+               Visibility="Collapsed"
+               TextWrapping="Wrap">
+        <Run Text=""/>
+        <AutomationProperties.LiveSetting>Assertive</AutomationProperties.LiveSetting>
+    </TextBlock>
+</StackPanel>
+
+<!-- Example: Password Input with Reveal Button -->
+<StackPanel Spacing="4" MaxWidth="400" Margin="0,24,0,0">
+    <TextBlock Text="Password"
+               Style="{StaticResource CaptionTextBlockStyle}"
+               FontWeight="SemiBold"
+               Foreground="{ThemeResource TextSecondaryBrush}"/>
+    
+    <PasswordBox x:Name="PasswordInput"
+                 PlaceholderText="Enter your password"
+                 Height="32"
+                 CornerRadius="4"
+                 BorderThickness="1"
+                 Padding="8,0"
+                 PasswordRevealMode="Peek">
+        <AutomationProperties.Name>Password</AutomationProperties.Name>
+        <AutomationProperties.AutomationId>PasswordInput_Main</AutomationProperties.AutomationId>
+    </PasswordBox>
+    
+    <TextBlock Text="Must be at least 8 characters"
+               Style="{StaticResource CaptionTextBlockStyle}"
+               Foreground="{ThemeResource TextTertiaryBrush}"/>
+</StackPanel>
+
+<!-- Example: Search Input -->
+<Grid MaxWidth="400" Margin="0,24,0,0">
+    <TextBox x:Name="SearchInput"
+             PlaceholderText="Search..."
+             Height="32"
+             CornerRadius="16"
+             BorderThickness="1"
+             Padding="36,0,36,0"
+             TextChanged="OnSearchTextChanged">
+        <AutomationProperties.Name>Search</AutomationProperties.Name>
+        <AutomationProperties.AutomationId>SearchInput_Main</AutomationProperties.AutomationId>
+    </TextBox>
+    
+    <!-- Search Icon -->
+    <FontIcon FontFamily="Segoe Fluent Icons" 
+              Glyph="&#xE721;" 
+              FontSize="16"
+              Foreground="{ThemeResource TextSecondaryBrush}"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Center"
+              Margin="12,0,0,0"
+              IsHitTestVisible="False"/>
+    
+    <!-- Clear Search Button -->
+    <Button x:Name="ClearSearchButton"
+            Width="24"
+            Height="24"
+            Padding="0"
+            Background="Transparent"
+            BorderThickness="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Margin="0,0,8,0"
+            Visibility="Collapsed"
+            Click="OnClearSearch">
+        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE711;" FontSize="12"/>
+        <AutomationProperties.Name>Clear search</AutomationProperties.Name>
+    </Button>
+</Grid>
+
+<!--
+Design Tokens Used:
+- Height: componentSize.input.height.standard (32px)
+- BorderRadius: borderRadius.sm (4px), borderRadius.full (16px for search)
+- BorderWidth: borderWidth.thin (1px)
+- Spacing: spacing.xs (4px) between label and input
+- Padding: spacing.sm (8px) horizontal
+
+Accessibility Features:
+- Associated labels (via AutomationProperties)
+- Helper text for guidance (aria-describedby equivalent)
+- Error messages in live region for announcements
+- Clear keyboard navigation
+- Placeholder text for examples only (not instructions)
+
+States:
+- Default: Surface background, Divider border
+- Hover: TextSecondary border
+- Focus: 2px Primary border
+- Error: 2px Error border
+- Disabled: TextTertiary text, Divider border
+- Read-only: Background color, no border
+
+Validation:
+- Validate on blur (not on every keystroke)
+- Show errors below input
+- Use aria-invalid state
+- Provide clear error messages
+- Don't clear input on error
+
+Best Practices:
+- Always provide visible labels
+- Use placeholder for examples, not instructions
+- Show helper text for format requirements
+- Validate appropriately (email, password rules)
+- Support paste operations
+- Character counter for limited inputs
+-->
