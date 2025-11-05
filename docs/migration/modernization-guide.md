@@ -1173,7 +1173,7 @@ dotnet format MyFile.cs
 ```yaml
 # GitHub Action for SonarCloud
 - name: SonarCloud Scan
-  uses: SonarSource/sonarcloud-github-action@master
+  uses: SonarSource/sonarcloud-github-action@v2.3.0
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

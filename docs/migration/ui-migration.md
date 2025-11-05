@@ -95,7 +95,7 @@ graph TD
 - ✅ Mature ecosystem and tooling important
 
 ### Choose WinUI 3 When:
-- ✅ **Target Windows 10 1809+ only** (Recommended for new projects)
+- ✅ **Target Windows 10 1809+ (build 17763) or newer only** (Recommended for new projects)
 - ✅ Want modern Fluent Design out of the box
 - ✅ Need best performance and touch support
 - ✅ Long-term investment (Microsoft's future direction)
