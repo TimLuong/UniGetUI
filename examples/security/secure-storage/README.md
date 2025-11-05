@@ -31,14 +31,21 @@ SecureStorageExample/
 ### Prerequisites
 
 - .NET 8.0 SDK or later
-- Windows 10 or later
+- Windows 10 or later (this example uses Windows-specific APIs)
 
 ### Build and Run
+
+**Note:** This example must be built and run on Windows as it uses Windows-specific APIs like Windows Credential Manager.
 
 ```bash
 cd examples/security/secure-storage
 dotnet build
 dotnet run
+```
+
+**For cross-platform builds from non-Windows systems:**
+```bash
+dotnet build /p:EnableWindowsTargeting=true
 ```
 
 ## Implementation Details
