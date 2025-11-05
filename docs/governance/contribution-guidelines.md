@@ -664,7 +664,10 @@ Maintainers have additional responsibilities:
 
 ### Examples
 
-- [Good RFC Example](./rfcs/) - (To be added)
+<!-- Note: Example RFCs and contributions will be added as the governance framework is used -->
+<!-- Check back for real-world examples of good patterns and contributions -->
+
+- [Good RFC Example] - Coming soon as RFCs are created
 - [Good Pattern Documentation](../codebase-analysis/07-best-practices/patterns-standards.md)
 - [Example Contributions](../../CONTRIBUTING.md)
 

@@ -1,8 +1,11 @@
 # RFC-XXXX: [Title]
 
+<!-- Replace XXXX with the next sequential number (e.g., RFC-0001, RFC-0002, etc.) -->
+<!-- Use 4-digit zero-padded format: RFC-0001, RFC-0002, ..., RFC-0010, etc. -->
+
 ## Metadata
 
-- **RFC Number:** XXXX
+- **RFC Number:** XXXX <!-- Example: RFC-0001 -->
 - **Title:** [Brief, descriptive title]
 - **Author(s):** [Name(s) and GitHub handle(s)]
 - **Status:** [Draft | Under Review | Accepted | Rejected | Implemented]
