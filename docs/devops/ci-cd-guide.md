@@ -618,6 +618,6 @@ Use `tmate` for SSH access to runner:
 
 ---
 
-**Last Updated**: November 2025  
+**Last Updated**: 2025-01-05  
 **Maintainer**: DevOps Team  
 **Version**: 1.0

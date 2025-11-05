@@ -17,7 +17,8 @@ on:
       - '.github/workflows/test.yml'
   workflow_dispatch:
   schedule:
-    # Run tests daily at 2 AM UTC
+    # Run tests daily at 2 AM UTC (Coordinated Universal Time)
+    # Note: GitHub Actions uses UTC timezone for all cron schedules
     - cron: '0 2 * * *'
 
 env:
@@ -112,8 +113,9 @@ jobs:
     - name: Run integration tests
       working-directory: src
       run: |
-        # Add integration test execution when available
-        echo "Integration tests would run here"
+        # TODO: Add integration test execution when available
+        # Integration tests would run here to test component interactions
+        echo "Integration tests placeholder - implement when test infrastructure is ready"
         
   code-quality:
     name: Code Quality Analysis

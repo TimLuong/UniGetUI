@@ -336,9 +336,9 @@ stages:
           
           ## Installation
           Download from GitHub Releases or install via WinGet:
-          ``````
+          ```
           winget install MartiCliment.UniGetUI
-          ``````
+          ```
           "@
           
           $releaseNotes | Out-File -FilePath "$(Build.ArtifactStagingDirectory)/release-notes.md"

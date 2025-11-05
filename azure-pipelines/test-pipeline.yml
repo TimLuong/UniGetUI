@@ -89,11 +89,11 @@ stages:
         failTaskOnFailedTests: true
         testRunTitle: 'Unit Tests'
     
-    - task: PublishCodeCoverageResults@2
+    - name: Publish code coverage
       displayName: 'Publish code coverage'
       inputs:
         summaryFileLocation: '$(Agent.TempDirectory)/TestResults/**/coverage.opencover.xml'
-        codecoverageTool: 'Cobertura'
+        codecoverageTool: 'OpenCover'
         failIfCoverageEmpty: false
     
     - task: PublishBuildArtifacts@1
