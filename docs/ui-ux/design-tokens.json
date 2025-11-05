@@ -1,0 +1,667 @@
+{
+  "$schema": "https://schemas.microsoft.com/design-tokens/2021-01-01/schema.json",
+  "version": "1.0.0",
+  "lastUpdated": "2025-11-05",
+  "description": "UniGetUI Design System - Design Tokens for Windows Applications",
+  
+  "colors": {
+    "light": {
+      "primary": {
+        "default": {
+          "value": "#0067C0",
+          "type": "color",
+          "description": "Main brand color for primary actions"
+        },
+        "hover": {
+          "value": "#005A9E",
+          "type": "color",
+          "description": "Hover state for primary elements"
+        },
+        "pressed": {
+          "value": "#004D84",
+          "type": "color",
+          "description": "Pressed state for primary elements"
+        }
+      },
+      "accent": {
+        "default": {
+          "value": "#0078D4",
+          "type": "color",
+          "description": "System accent color (Windows theme-aware)"
+        },
+        "light": {
+          "value": "#4A9EE5",
+          "type": "color",
+          "description": "Light variant of accent color"
+        },
+        "dark": {
+          "value": "#005A9E",
+          "type": "color",
+          "description": "Dark variant of accent color"
+        }
+      },
+      "neutral": {
+        "background": {
+          "value": "#F9F9F9",
+          "type": "color",
+          "description": "Main application background"
+        },
+        "surface": {
+          "value": "#FFFFFF",
+          "type": "color",
+          "description": "Card and surface background"
+        },
+        "surfaceElevated": {
+          "value": "#FFFFFF",
+          "type": "color",
+          "description": "Elevated surface (with shadow)"
+        },
+        "divider": {
+          "value": "#E5E5E5",
+          "type": "color",
+          "description": "Divider lines and borders"
+        }
+      },
+      "text": {
+        "primary": {
+          "value": "#1F1F1F",
+          "type": "color",
+          "description": "Primary text color"
+        },
+        "secondary": {
+          "value": "#616161",
+          "type": "color",
+          "description": "Secondary text color"
+        },
+        "tertiary": {
+          "value": "#8A8A8A",
+          "type": "color",
+          "description": "Tertiary text and disabled state"
+        },
+        "onPrimary": {
+          "value": "#FFFFFF",
+          "type": "color",
+          "description": "Text on primary colored backgrounds"
+        }
+      },
+      "semantic": {
+        "success": {
+          "value": "#107C10",
+          "type": "color",
+          "description": "Success states and confirmations"
+        },
+        "warning": {
+          "value": "#FCE100",
+          "type": "color",
+          "description": "Warning states and caution"
+        },
+        "error": {
+          "value": "#D13438",
+          "type": "color",
+          "description": "Error states and destructive actions"
+        },
+        "info": {
+          "value": "#0078D4",
+          "type": "color",
+          "description": "Informational messages"
+        }
+      }
+    },
+    "dark": {
+      "primary": {
+        "default": {
+          "value": "#60CDFF",
+          "type": "color",
+          "description": "Main brand color for primary actions in dark mode"
+        },
+        "hover": {
+          "value": "#88D9FF",
+          "type": "color",
+          "description": "Hover state for primary elements in dark mode"
+        },
+        "pressed": {
+          "value": "#3CB4E5",
+          "type": "color",
+          "description": "Pressed state for primary elements in dark mode"
+        }
+      },
+      "accent": {
+        "default": {
+          "value": "#60CDFF",
+          "type": "color",
+          "description": "System accent color in dark mode"
+        },
+        "light": {
+          "value": "#88D9FF",
+          "type": "color",
+          "description": "Light variant of accent color in dark mode"
+        },
+        "dark": {
+          "value": "#3CB4E5",
+          "type": "color",
+          "description": "Dark variant of accent color in dark mode"
+        }
+      },
+      "neutral": {
+        "background": {
+          "value": "#202020",
+          "type": "color",
+          "description": "Main application background in dark mode"
+        },
+        "surface": {
+          "value": "#2C2C2C",
+          "type": "color",
+          "description": "Card and surface background in dark mode"
+        },
+        "surfaceElevated": {
+          "value": "#333333",
+          "type": "color",
+          "description": "Elevated surface in dark mode"
+        },
+        "divider": {
+          "value": "#3F3F3F",
+          "type": "color",
+          "description": "Divider lines and borders in dark mode"
+        }
+      },
+      "text": {
+        "primary": {
+          "value": "#FFFFFF",
+          "type": "color",
+          "description": "Primary text color in dark mode"
+        },
+        "secondary": {
+          "value": "#C5C5C5",
+          "type": "color",
+          "description": "Secondary text color in dark mode"
+        },
+        "tertiary": {
+          "value": "#8A8A8A",
+          "type": "color",
+          "description": "Tertiary text and disabled state in dark mode"
+        },
+        "onPrimary": {
+          "value": "#000000",
+          "type": "color",
+          "description": "Text on primary colored backgrounds in dark mode"
+        }
+      },
+      "semantic": {
+        "success": {
+          "value": "#6CCB5F",
+          "type": "color",
+          "description": "Success states in dark mode"
+        },
+        "warning": {
+          "value": "#FFF100",
+          "type": "color",
+          "description": "Warning states in dark mode"
+        },
+        "error": {
+          "value": "#FF4343",
+          "type": "color",
+          "description": "Error states in dark mode"
+        },
+        "info": {
+          "value": "#60CDFF",
+          "type": "color",
+          "description": "Informational messages in dark mode"
+        }
+      }
+    }
+  },
+  
+  "typography": {
+    "fontFamily": {
+      "base": {
+        "value": "Segoe UI Variable, Segoe UI, sans-serif",
+        "type": "fontFamily",
+        "description": "Primary font family for all text"
+      },
+      "monospace": {
+        "value": "Cascadia Mono, Consolas, monospace",
+        "type": "fontFamily",
+        "description": "Monospace font for code"
+      }
+    },
+    "fontSize": {
+      "display": {
+        "value": "28px",
+        "type": "fontSize",
+        "description": "Page titles, major headings"
+      },
+      "titleLarge": {
+        "value": "24px",
+        "type": "fontSize",
+        "description": "Section headers"
+      },
+      "title": {
+        "value": "20px",
+        "type": "fontSize",
+        "description": "Card headers, dialog titles"
+      },
+      "subtitle": {
+        "value": "16px",
+        "type": "fontSize",
+        "description": "Group headers, subheadings"
+      },
+      "bodyStrong": {
+        "value": "14px",
+        "type": "fontSize",
+        "description": "Emphasized body text"
+      },
+      "body": {
+        "value": "14px",
+        "type": "fontSize",
+        "description": "Default body text"
+      },
+      "captionStrong": {
+        "value": "12px",
+        "type": "fontSize",
+        "description": "Small emphasized text"
+      },
+      "caption": {
+        "value": "12px",
+        "type": "fontSize",
+        "description": "Small text, labels, metadata"
+      }
+    },
+    "fontWeight": {
+      "regular": {
+        "value": 400,
+        "type": "fontWeight",
+        "description": "Regular weight for body text"
+      },
+      "semibold": {
+        "value": 600,
+        "type": "fontWeight",
+        "description": "Semibold weight for headings and emphasis"
+      }
+    },
+    "lineHeight": {
+      "display": {
+        "value": "36px",
+        "type": "lineHeight",
+        "description": "Line height for display text"
+      },
+      "titleLarge": {
+        "value": "32px",
+        "type": "lineHeight",
+        "description": "Line height for large titles"
+      },
+      "title": {
+        "value": "28px",
+        "type": "lineHeight",
+        "description": "Line height for titles"
+      },
+      "subtitle": {
+        "value": "24px",
+        "type": "lineHeight",
+        "description": "Line height for subtitles"
+      },
+      "bodyStrong": {
+        "value": "20px",
+        "type": "lineHeight",
+        "description": "Line height for strong body text"
+      },
+      "body": {
+        "value": "20px",
+        "type": "lineHeight",
+        "description": "Line height for body text"
+      },
+      "captionStrong": {
+        "value": "16px",
+        "type": "lineHeight",
+        "description": "Line height for strong captions"
+      },
+      "caption": {
+        "value": "16px",
+        "type": "lineHeight",
+        "description": "Line height for captions"
+      }
+    }
+  },
+  
+  "spacing": {
+    "xs": {
+      "value": "4px",
+      "type": "spacing",
+      "description": "Minimal spacing, tight elements"
+    },
+    "sm": {
+      "value": "8px",
+      "type": "spacing",
+      "description": "Compact spacing, related items"
+    },
+    "md": {
+      "value": "12px",
+      "type": "spacing",
+      "description": "Default spacing between elements"
+    },
+    "lg": {
+      "value": "16px",
+      "type": "spacing",
+      "description": "Section spacing, grouped content"
+    },
+    "xl": {
+      "value": "24px",
+      "type": "spacing",
+      "description": "Major section spacing"
+    },
+    "2xl": {
+      "value": "32px",
+      "type": "spacing",
+      "description": "Page-level spacing"
+    },
+    "3xl": {
+      "value": "48px",
+      "type": "spacing",
+      "description": "Maximum spacing, page boundaries"
+    }
+  },
+  
+  "elevation": {
+    "level0": {
+      "value": "none",
+      "type": "boxShadow",
+      "description": "Flat elements, no elevation"
+    },
+    "level1": {
+      "value": "0px 1px 3px rgba(0,0,0,0.08)",
+      "type": "boxShadow",
+      "description": "Subtle elevation, cards"
+    },
+    "level2": {
+      "value": "0px 2px 6px rgba(0,0,0,0.12)",
+      "type": "boxShadow",
+      "description": "Moderate elevation, dropdowns"
+    },
+    "level3": {
+      "value": "0px 4px 12px rgba(0,0,0,0.16)",
+      "type": "boxShadow",
+      "description": "High elevation, modals"
+    },
+    "level4": {
+      "value": "0px 8px 24px rgba(0,0,0,0.20)",
+      "type": "boxShadow",
+      "description": "Maximum elevation, popovers"
+    }
+  },
+  
+  "borderRadius": {
+    "none": {
+      "value": "0px",
+      "type": "borderRadius",
+      "description": "Sharp corners (rare)"
+    },
+    "sm": {
+      "value": "4px",
+      "type": "borderRadius",
+      "description": "Buttons, inputs, small elements"
+    },
+    "md": {
+      "value": "8px",
+      "type": "borderRadius",
+      "description": "Cards, panels, medium elements"
+    },
+    "lg": {
+      "value": "12px",
+      "type": "borderRadius",
+      "description": "Large containers, dialogs"
+    },
+    "full": {
+      "value": "999px",
+      "type": "borderRadius",
+      "description": "Circular elements, pills"
+    }
+  },
+  
+  "borderWidth": {
+    "none": {
+      "value": "0px",
+      "type": "borderWidth",
+      "description": "No border"
+    },
+    "thin": {
+      "value": "1px",
+      "type": "borderWidth",
+      "description": "Standard border width"
+    },
+    "medium": {
+      "value": "2px",
+      "type": "borderWidth",
+      "description": "Emphasized borders, focus indicators"
+    },
+    "thick": {
+      "value": "3px",
+      "type": "borderWidth",
+      "description": "Selection indicators"
+    }
+  },
+  
+  "iconSize": {
+    "small": {
+      "value": "16px",
+      "type": "sizing",
+      "description": "Inline icons, list items"
+    },
+    "medium": {
+      "value": "20px",
+      "type": "sizing",
+      "description": "Default size for most UI elements"
+    },
+    "large": {
+      "value": "24px",
+      "type": "sizing",
+      "description": "Prominent actions, headers"
+    },
+    "extraLarge": {
+      "value": "32px",
+      "type": "sizing",
+      "description": "Feature highlights, empty states"
+    }
+  },
+  
+  "componentSize": {
+    "button": {
+      "height": {
+        "standard": {
+          "value": "32px",
+          "type": "sizing",
+          "description": "Standard button height"
+        },
+        "large": {
+          "value": "40px",
+          "type": "sizing",
+          "description": "Large button height"
+        }
+      },
+      "minWidth": {
+        "value": "120px",
+        "type": "sizing",
+        "description": "Minimum button width"
+      }
+    },
+    "input": {
+      "height": {
+        "standard": {
+          "value": "32px",
+          "type": "sizing",
+          "description": "Standard input height"
+        },
+        "large": {
+          "value": "40px",
+          "type": "sizing",
+          "description": "Large input height"
+        }
+      }
+    },
+    "iconButton": {
+      "size": {
+        "standard": {
+          "value": "32px",
+          "type": "sizing",
+          "description": "Standard icon button size"
+        },
+        "large": {
+          "value": "40px",
+          "type": "sizing",
+          "description": "Large icon button size"
+        }
+      }
+    },
+    "touchTarget": {
+      "minimum": {
+        "value": "44px",
+        "type": "sizing",
+        "description": "Minimum touch target size for accessibility"
+      }
+    }
+  },
+  
+  "animation": {
+    "duration": {
+      "instant": {
+        "value": "0ms",
+        "type": "duration",
+        "description": "Instant, no animation"
+      },
+      "fast": {
+        "value": "100ms",
+        "type": "duration",
+        "description": "Fast animations (hover states)"
+      },
+      "normal": {
+        "value": "200ms",
+        "type": "duration",
+        "description": "Normal animations (most interactions)"
+      },
+      "slow": {
+        "value": "300ms",
+        "type": "duration",
+        "description": "Slow animations (panels, modals)"
+      },
+      "slower": {
+        "value": "500ms",
+        "type": "duration",
+        "description": "Very slow animations (complex transitions)"
+      }
+    },
+    "easing": {
+      "linear": {
+        "value": "linear",
+        "type": "cubicBezier",
+        "description": "Linear easing"
+      },
+      "easeIn": {
+        "value": "cubic-bezier(0.4, 0, 1, 1)",
+        "type": "cubicBezier",
+        "description": "Ease in"
+      },
+      "easeOut": {
+        "value": "cubic-bezier(0, 0, 0.2, 1)",
+        "type": "cubicBezier",
+        "description": "Ease out"
+      },
+      "easeInOut": {
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "type": "cubicBezier",
+        "description": "Ease in-out"
+      },
+      "easeOutCubic": {
+        "value": "cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "type": "cubicBezier",
+        "description": "Ease out cubic (panel open)"
+      },
+      "easeInCubic": {
+        "value": "cubic-bezier(0.55, 0.055, 0.675, 0.19)",
+        "type": "cubicBezier",
+        "description": "Ease in cubic (panel close)"
+      },
+      "easeOutQuint": {
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "type": "cubicBezier",
+        "description": "Ease out quint (slide in)"
+      },
+      "easeOutBack": {
+        "value": "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+        "type": "cubicBezier",
+        "description": "Ease out back (pop-ups, tooltips)"
+      }
+    }
+  },
+  
+  "breakpoints": {
+    "mobile": {
+      "value": "768px",
+      "type": "breakpoint",
+      "description": "Mobile devices, phones"
+    },
+    "tablet": {
+      "value": "1024px",
+      "type": "breakpoint",
+      "description": "Tablets, small laptops"
+    },
+    "desktop": {
+      "value": "1440px",
+      "type": "breakpoint",
+      "description": "Standard desktops"
+    }
+  },
+  
+  "zIndex": {
+    "base": {
+      "value": 0,
+      "type": "zIndex",
+      "description": "Base z-index"
+    },
+    "dropdown": {
+      "value": 1000,
+      "type": "zIndex",
+      "description": "Dropdown menus"
+    },
+    "sticky": {
+      "value": 1100,
+      "type": "zIndex",
+      "description": "Sticky headers"
+    },
+    "overlay": {
+      "value": 1200,
+      "type": "zIndex",
+      "description": "Overlay backgrounds"
+    },
+    "modal": {
+      "value": 1300,
+      "type": "zIndex",
+      "description": "Modal dialogs"
+    },
+    "popover": {
+      "value": 1400,
+      "type": "zIndex",
+      "description": "Popovers and tooltips"
+    },
+    "toast": {
+      "value": 1500,
+      "type": "zIndex",
+      "description": "Toast notifications"
+    }
+  },
+  
+  "opacity": {
+    "disabled": {
+      "value": 0.5,
+      "type": "opacity",
+      "description": "Disabled state opacity"
+    },
+    "overlay": {
+      "value": 0.6,
+      "type": "opacity",
+      "description": "Overlay background opacity"
+    },
+    "hover": {
+      "value": 0.1,
+      "type": "opacity",
+      "description": "Hover state background opacity"
+    }
+  }
+}

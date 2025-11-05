@@ -1,0 +1,75 @@
+<!-- Primary Button Example -->
+<!-- Follows UniGetUI Design System specification for Primary Buttons -->
+<!-- See: /docs/ui-ux/component-specifications.md#primary-button -->
+
+<Button x:Name="PrimaryButton"
+        Style="{StaticResource AccentButtonStyle}"
+        Content="Save Changes"
+        MinWidth="120"
+        Height="32"
+        HorizontalAlignment="Left"
+        CornerRadius="4"
+        IsEnabled="True">
+    
+    <!-- Visual States -->
+    <Button.Resources>
+        <!-- Define custom resources if needed -->
+    </Button.Resources>
+    
+    <!-- Accessibility -->
+    <AutomationProperties.Name>Save Changes</AutomationProperties.Name>
+    <AutomationProperties.AutomationId>PrimaryButton_SaveChanges</AutomationProperties.AutomationId>
+    <AutomationProperties.HelpText>Saves the current changes to the document</AutomationProperties.HelpText>
+    
+    <ToolTipService.ToolTip>
+        <ToolTip Content="Click to save your changes (Ctrl+S)"/>
+    </ToolTipService.ToolTip>
+</Button>
+
+<!-- Example Usage in Context -->
+<StackPanel Orientation="Horizontal" Spacing="12">
+    <!-- Primary action button -->
+    <Button Style="{StaticResource AccentButtonStyle}"
+            Content="Create Project"
+            MinWidth="120"
+            Height="32"
+            Click="OnCreateProject">
+        <AutomationProperties.Name>Create Project</AutomationProperties.Name>
+    </Button>
+    
+    <!-- Secondary/Cancel button -->
+    <Button Style="{StaticResource DefaultButtonStyle}"
+            Content="Cancel"
+            MinWidth="120"
+            Height="32"
+            Click="OnCancel">
+        <AutomationProperties.Name>Cancel</AutomationProperties.Name>
+    </Button>
+</StackPanel>
+
+<!--
+Design Tokens Used:
+- Height: componentSize.button.height.standard (32px)
+- MinWidth: componentSize.button.minWidth (120px)
+- BorderRadius: borderRadius.sm (4px)
+- Spacing: spacing.md (12px) between buttons
+
+Accessibility Features:
+- AutomationProperties for screen reader support
+- Keyboard accessible (Space/Enter to activate)
+- Tooltip for additional context
+- Clear, descriptive content text
+
+States:
+- Default: Primary color background, white text
+- Hover: PrimaryHover background
+- Pressed: PrimaryPressed background
+- Disabled: Surface background, TextTertiary text
+- Focus: 2px Accent outline with 2px offset
+
+Best Practices:
+- One primary button per section/dialog
+- Use for main call-to-action only
+- Pair with secondary button for choice scenarios
+- Keep text concise and action-oriented
+-->

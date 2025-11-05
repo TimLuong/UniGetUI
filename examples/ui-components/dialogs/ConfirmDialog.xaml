@@ -1,0 +1,230 @@
+<!-- Confirmation Dialog Example -->
+<!-- Follows UniGetUI Design System specification for Dialogs -->
+<!-- See: /docs/ui-ux/component-specifications.md#dialog-modal -->
+
+<ContentDialog x:Name="ConfirmDialog"
+               Title="Confirm Deletion"
+               PrimaryButtonText="Delete"
+               SecondaryButtonText="Cancel"
+               DefaultButton="Secondary"
+               IsPrimaryButtonEnabled="True"
+               PrimaryButtonClick="OnConfirmDelete"
+               SecondaryButtonClick="OnCancel"
+               CloseButtonClick="OnCancel">
+    
+    <!-- Dialog Content -->
+    <StackPanel Spacing="16" MaxWidth="500">
+        <!-- Warning Icon -->
+        <FontIcon FontFamily="Segoe Fluent Icons"
+                  Glyph="&#xE7BA;"
+                  FontSize="48"
+                  Foreground="{ThemeResource SystemErrorTextColor}"
+                  HorizontalAlignment="Center"
+                  Margin="0,8,0,0"/>
+        
+        <!-- Main Message -->
+        <TextBlock TextWrapping="Wrap"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center">
+            <Run Text="Are you sure you want to delete "/>
+            <Run Text="{x:Bind ItemName}" FontWeight="SemiBold"/>
+            <Run Text="?"/>
+        </TextBlock>
+        
+        <!-- Warning Message -->
+        <TextBlock Text="This action cannot be undone. All associated data will be permanently removed."
+                   TextWrapping="Wrap"
+                   Foreground="{ThemeResource TextSecondaryBrush}"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center"
+                   Style="{StaticResource CaptionTextBlockStyle}"/>
+        
+        <!-- Optional: Don't ask again checkbox -->
+        <CheckBox x:Name="DontAskAgainCheckbox"
+                  Content="Don't ask me again"
+                  Margin="0,8,0,0">
+            <AutomationProperties.Name>Don't ask me again</AutomationProperties.Name>
+        </CheckBox>
+    </StackPanel>
+    
+    <!-- Accessibility -->
+    <AutomationProperties.Name>Confirm Deletion Dialog</AutomationProperties.Name>
+    <AutomationProperties.AutomationId>ConfirmDialog_Delete</AutomationProperties.AutomationId>
+</ContentDialog>
+
+<!-- Example: Form Dialog -->
+<ContentDialog x:Name="FormDialog"
+               Title="Create New Project"
+               PrimaryButtonText="Create"
+               SecondaryButtonText="Cancel"
+               DefaultButton="Primary"
+               IsPrimaryButtonEnabled="False"
+               PrimaryButtonClick="OnCreateProject"
+               SecondaryButtonClick="OnCancel">
+    
+    <ScrollViewer MaxHeight="400">
+        <StackPanel Spacing="16">
+            <!-- Project Name -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="Project Name"
+                           Style="{StaticResource CaptionTextBlockStyle}"
+                           FontWeight="SemiBold">
+                    <Run Text="*" Foreground="{ThemeResource SystemErrorTextColor}"/>
+                </TextBlock>
+                <TextBox x:Name="ProjectNameInput"
+                         PlaceholderText="Enter project name"
+                         Height="32"
+                         TextChanged="OnFormInputChanged">
+                    <AutomationProperties.Name>Project Name</AutomationProperties.Name>
+                    <AutomationProperties.IsRequiredForForm>True</AutomationProperties.IsRequiredForForm>
+                </TextBox>
+            </StackPanel>
+            
+            <!-- Project Description -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="Description"
+                           Style="{StaticResource CaptionTextBlockStyle}"
+                           FontWeight="SemiBold"/>
+                <TextBox x:Name="DescriptionInput"
+                         PlaceholderText="Optional description"
+                         Height="80"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True">
+                    <AutomationProperties.Name>Project Description</AutomationProperties.Name>
+                </TextBox>
+            </StackPanel>
+            
+            <!-- Project Type -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="Project Type"
+                           Style="{StaticResource CaptionTextBlockStyle}"
+                           FontWeight="SemiBold">
+                    <Run Text="*" Foreground="{ThemeResource SystemErrorTextColor}"/>
+                </TextBlock>
+                <ComboBox x:Name="ProjectTypeCombo"
+                          PlaceholderText="Select project type"
+                          Width="300"
+                          HorizontalAlignment="Left"
+                          SelectionChanged="OnFormInputChanged">
+                    <ComboBoxItem Content="Desktop Application"/>
+                    <ComboBoxItem Content="Web Application"/>
+                    <ComboBoxItem Content="Mobile Application"/>
+                    <ComboBoxItem Content="Library"/>
+                    <AutomationProperties.Name>Project Type</AutomationProperties.Name>
+                    <AutomationProperties.IsRequiredForForm>True</AutomationProperties.IsRequiredForForm>
+                </ComboBox>
+            </StackPanel>
+            
+            <!-- Required Fields Note -->
+            <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
+                       Foreground="{ThemeResource TextTertiaryBrush}">
+                <Run Text="*" Foreground="{ThemeResource SystemErrorTextColor}"/>
+                <Run Text="Required fields"/>
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+    
+    <AutomationProperties.Name>Create New Project Dialog</AutomationProperties.Name>
+</ContentDialog>
+
+<!-- Example: Alert Dialog (Information) -->
+<ContentDialog x:Name="AlertDialog"
+               Title="Update Available"
+               PrimaryButtonText="Update Now"
+               CloseButtonText="Later"
+               DefaultButton="Primary"
+               PrimaryButtonClick="OnUpdateNow">
+    
+    <StackPanel Spacing="16" MaxWidth="500">
+        <!-- Info Icon -->
+        <FontIcon FontFamily="Segoe Fluent Icons"
+                  Glyph="&#xE946;"
+                  FontSize="48"
+                  Foreground="{ThemeResource SystemAccentColor}"
+                  HorizontalAlignment="Center"
+                  Margin="0,8,0,0"/>
+        
+        <!-- Message -->
+        <TextBlock TextWrapping="Wrap"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center">
+            <Run Text="Version 2.0.0 is now available."/>
+        </TextBlock>
+        
+        <!-- Details -->
+        <StackPanel Spacing="8">
+            <TextBlock Text="What's New:"
+                       FontWeight="SemiBold"/>
+            <RichTextBlock>
+                <Paragraph>
+                    <Run Text="• Improved performance"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="• New features and enhancements"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="• Bug fixes and stability improvements"/>
+                </Paragraph>
+            </RichTextBlock>
+        </StackPanel>
+    </StackPanel>
+    
+    <AutomationProperties.Name>Update Available Dialog</AutomationProperties.Name>
+</ContentDialog>
+
+<!--
+Design Tokens Used:
+- MaxWidth: 500-600px for content
+- Padding: spacing.xl (24px) around content
+- BorderRadius: borderRadius.lg (12px)
+- Shadow: elevation.level3
+
+Dialog Structure:
+1. Header: Title + Close button (top-right)
+2. Content: Scrollable if necessary (max-height: 70vh)
+3. Footer: Actions (right-aligned)
+
+Accessibility Features:
+- Role="dialog" or "alertdialog" (handled by ContentDialog)
+- aria-labelledby for title (handled automatically)
+- Focus trap within dialog
+- Escape key to close (non-destructive actions)
+- Focus on first interactive element
+- Return focus to trigger on close
+
+Button Guidelines:
+- Primary button for main action
+- Secondary button for cancel/alternative
+- Close button for dismissal
+- DefaultButton indicates keyboard default (Enter)
+
+States & Behavior:
+- Modal overlay blocks interaction with background
+- Backdrop dismisses on click (for non-critical dialogs)
+- Escape key dismisses (for non-critical dialogs)
+- Animate slide-up on open (300ms)
+- Focus management (trap focus, return on close)
+
+Best Practices:
+- Clear, concise title
+- Brief, actionable message
+- Explain consequences of actions
+- Provide obvious way to dismiss
+- Don't stack modals
+- Use sparingly (interrupts workflow)
+- Confirmation for destructive actions
+- Form validation before enable primary button
+- Show loading state for async operations
+
+Types:
+1. Confirmation Dialog: Yes/No decisions
+2. Form Dialog: Input collection
+3. Alert Dialog: Information display
+4. Error Dialog: Error details and recovery
+
+Required Fields:
+- Mark with asterisk (*)
+- Explain at bottom
+- Disable submit until valid
+- Validate on blur
+-->
