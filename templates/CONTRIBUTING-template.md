@@ -396,7 +396,7 @@ public void Add_TwoPositiveNumbers_ReturnsSum()
 - Include code examples where helpful
 - Update changelog with notable changes
 
-See [Documentation Standards](docs/documentation/standards.md) for detailed guidelines.
+See the project's Documentation Standards for detailed guidelines (update this path based on where standards are located).
 
 ## Commit Guidelines
 
