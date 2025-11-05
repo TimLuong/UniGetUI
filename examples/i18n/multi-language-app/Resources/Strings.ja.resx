@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="ApplicationTitle" xml:space="preserve"><value>多言語アプリケーションの例</value></data>
+  <data name="WelcomeMessage" xml:space="preserve"><value>ようこそ！このアプリケーションは、ローカライゼーション機能を実演します。</value></data>
+  <data name="DateTimeFormatting" xml:space="preserve"><value>日付と時刻の書式設定</value></data>
+  <data name="NumberFormatting" xml:space="preserve"><value>数値の書式設定</value></data>
+  <data name="RegionalInformation" xml:space="preserve"><value>地域情報</value></data>
+  <data name="RefreshButton" xml:space="preserve"><value>更新</value></data>
+  <data name="ShortDate" xml:space="preserve"><value>短い日付</value></data>
+  <data name="LongDate" xml:space="preserve"><value>長い日付</value></data>
+  <data name="Time" xml:space="preserve"><value>時刻</value></data>
+  <data name="Number" xml:space="preserve"><value>数値</value></data>
+  <data name="Currency" xml:space="preserve"><value>通貨</value></data>
+  <data name="Percent" xml:space="preserve"><value>パーセント</value></data>
+  <data name="CultureName" xml:space="preserve"><value>カルチャ名</value></data>
+  <data name="DisplayName" xml:space="preserve"><value>表示名</value></data>
+  <data name="EnglishName" xml:space="preserve"><value>英語名</value></data>
+  <data name="NativeName" xml:space="preserve"><value>ネイティブ名</value></data>
+  <data name="CountryName" xml:space="preserve"><value>国/地域</value></data>
+  <data name="CurrencySymbol" xml:space="preserve"><value>通貨記号</value></data>
+  <data name="DecimalSeparator" xml:space="preserve"><value>小数点記号</value></data>
+  <data name="ThousandsSeparator" xml:space="preserve"><value>桁区切り記号</value></data>
+  <data name="ShortDatePattern" xml:space="preserve"><value>短い日付形式</value></data>
+  <data name="LongDatePattern" xml:space="preserve"><value>長い日付形式</value></data>
+  <data name="ShortTimePattern" xml:space="preserve"><value>短い時刻形式</value></data>
+  <data name="LongTimePattern" xml:space="preserve"><value>長い時刻形式</value></data>
+  <data name="FirstDayOfWeek" xml:space="preserve"><value>週の最初の曜日</value></data>
+  <data name="IsRightToLeft" xml:space="preserve"><value>右から左へ</value></data>
+</root>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="ApplicationTitle" xml:space="preserve"><value>Beispiel für mehrsprachige Anwendung</value></data>
+  <data name="WelcomeMessage" xml:space="preserve"><value>Willkommen! Diese Anwendung demonstriert Lokalisierungsfunktionen.</value></data>
+  <data name="DateTimeFormatting" xml:space="preserve"><value>Datums- und Zeitformatierung</value></data>
+  <data name="NumberFormatting" xml:space="preserve"><value>Zahlenformatierung</value></data>
+  <data name="RegionalInformation" xml:space="preserve"><value>Regionale Informationen</value></data>
+  <data name="RefreshButton" xml:space="preserve"><value>Aktualisieren</value></data>
+  <data name="ShortDate" xml:space="preserve"><value>Kurzes Datum</value></data>
+  <data name="LongDate" xml:space="preserve"><value>Langes Datum</value></data>
+  <data name="Time" xml:space="preserve"><value>Zeit</value></data>
+  <data name="Number" xml:space="preserve"><value>Zahl</value></data>
+  <data name="Currency" xml:space="preserve"><value>Währung</value></data>
+  <data name="Percent" xml:space="preserve"><value>Prozent</value></data>
+  <data name="CultureName" xml:space="preserve"><value>Kulturname</value></data>
+  <data name="DisplayName" xml:space="preserve"><value>Anzeigename</value></data>
+  <data name="EnglishName" xml:space="preserve"><value>Englischer Name</value></data>
+  <data name="NativeName" xml:space="preserve"><value>Nativer Name</value></data>
+  <data name="CountryName" xml:space="preserve"><value>Land/Region</value></data>
+  <data name="CurrencySymbol" xml:space="preserve"><value>Währungssymbol</value></data>
+  <data name="DecimalSeparator" xml:space="preserve"><value>Dezimaltrennzeichen</value></data>
+  <data name="ThousandsSeparator" xml:space="preserve"><value>Tausendertrennzeichen</value></data>
+  <data name="ShortDatePattern" xml:space="preserve"><value>Kurzes Datumsmuster</value></data>
+  <data name="LongDatePattern" xml:space="preserve"><value>Langes Datumsmuster</value></data>
+  <data name="ShortTimePattern" xml:space="preserve"><value>Kurzes Zeitmuster</value></data>
+  <data name="LongTimePattern" xml:space="preserve"><value>Langes Zeitmuster</value></data>
+  <data name="FirstDayOfWeek" xml:space="preserve"><value>Erster Wochentag</value></data>
+  <data name="IsRightToLeft" xml:space="preserve"><value>Ist Rechts-nach-Links</value></data>
+</root>
