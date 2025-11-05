@@ -87,9 +87,19 @@ public class UnitOfWork : IUnitOfWork
         }
     }
 
+    private bool _disposed = false;
+
     public void Dispose()
     {
-        _transaction?.Dispose();
-        _context.Dispose();
+        if (!_disposed)
+        {
+            if (_transaction != null)
+            {
+                _transaction.Dispose();
+                _transaction = null;
+            }
+            _context.Dispose();
+            _disposed = true;
+        }
     }
 }

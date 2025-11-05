@@ -223,9 +223,9 @@ private static readonly Func<ApplicationDbContext, int, Task<User?>> GetUserById
     EF.CompileAsyncQuery((ApplicationDbContext context, int userId) =>
         context.Users.FirstOrDefault(u => u.UserId == userId));
 
-private static readonly Func<ApplicationDbContext, string, IAsyncEnumerable<User>> GetUsersByNameCompiled =
+private static readonly Func<ApplicationDbContext, string, Task<List<User>>> GetUsersByNameCompiled =
     EF.CompileAsyncQuery((ApplicationDbContext context, string name) =>
-        context.Users.Where(u => u.Username.Contains(name)));
+        context.Users.Where(u => u.Username.Contains(name)).ToList());
 
 public async Task<User?> GetUserByIdAsync(int userId)
 {
@@ -235,12 +235,7 @@ public async Task<User?> GetUserByIdAsync(int userId)
 
 public async Task<List<User>> GetUsersByNameAsync(string name)
 {
-    var users = new List<User>();
-    await foreach (var user in GetUsersByNameCompiled(_context, name))
-    {
-        users.Add(user);
-    }
-    return users;
+    return await GetUsersByNameCompiled(_context, name);
 }
 ```
 
