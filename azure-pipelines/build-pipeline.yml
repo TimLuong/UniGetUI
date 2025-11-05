@@ -1,0 +1,103 @@
+# Azure DevOps Pipeline - Build
+# This pipeline compiles the UniGetUI application
+
+trigger:
+  branches:
+    include:
+    - main
+    - develop
+  paths:
+    include:
+    - '**.cs'
+    - '**.csproj'
+    - '**.sln'
+    - 'scripts/**'
+
+pr:
+  branches:
+    include:
+    - main
+    - develop
+  paths:
+    include:
+    - '**.cs'
+    - '**.csproj'
+    - '**.sln'
+    - 'scripts/**'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  buildPlatform: 'x64'
+  dotnetVersion: '8.0.x'
+
+stages:
+- stage: Build
+  displayName: 'Build Application'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build and Package'
+    steps:
+    
+    - checkout: self
+      fetchDepth: 0
+      displayName: 'Checkout repository'
+    
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        version: $(dotnetVersion)
+        packageType: sdk
+    
+    - task: Cache@2
+      displayName: 'Cache NuGet packages'
+      inputs:
+        key: 'nuget | "$(Agent.OS)" | **/packages.lock.json'
+        restoreKeys: |
+          nuget | "$(Agent.OS)"
+          nuget
+        path: $(NUGET_PACKAGES)
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore dependencies'
+      inputs:
+        command: 'restore'
+        projects: 'src/UniGetUI.sln'
+        verbosityRestore: 'Minimal'
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Build solution'
+      inputs:
+        command: 'build'
+        projects: 'src/UniGetUI.sln'
+        arguments: '--configuration $(buildConfiguration) --no-restore --verbosity minimal'
+    
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish application'
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: 'src/UniGetUI/UniGetUI.csproj'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:Platform=$(buildPlatform) --verbosity minimal'
+        zipAfterPublish: false
+        modifyOutputPath: false
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish build artifacts'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'unigetui-$(buildConfiguration)'
+        publishLocation: 'Container'
+    
+    - task: PowerShell@2
+      displayName: 'Generate build summary'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "##[section]Build Summary"
+          Write-Host "Configuration: $(buildConfiguration)"
+          Write-Host "Platform: $(buildPlatform)"
+          Write-Host "Commit: $(Build.SourceVersion)"
+          Write-Host "Branch: $(Build.SourceBranchName)"
